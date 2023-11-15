@@ -84,16 +84,15 @@ def favoritos_actualizar(request):
 
 
 
-def favoritos(request):
-    # select * from favoritos
-    consulta = Favorito.objects.all()
+def hotel_comodidad(request):
+    consulta = Hotel_comodidad.objects.all()
     context = {'data': consulta}
-    return render(request, 'planning_travel/favoritos/favoritos.html', context)
+    return render(request, 'planning_travel/hotel_comodidad/hotel_comodidad.html', context)
 
-def favoritos_form(request):
-    return render(request, 'planning_travel/favoritos/favoritos_form.html')
+def hotel_comodidad_form(request):
+    return render(request, 'planning_travel/hotel_comodidad/hotel_comodidad_form.html')
 
-def favoritos_crear(request):
+def hotel_comodidad_crear(request):
     if request.method == 'POST':
         id_hotel = request.POST.get('id_hotel')
         id_usuario = request.POST.get('id_usuario')
@@ -110,27 +109,27 @@ def favoritos_crear(request):
         except Exception as e:
             messages.error(request,f'Error: {e}')
 
-        return redirect('favoritos_listar')
+        return redirect('hotel_comodidad_listar')
     else:
         messages.warning(request,'No se enviaron datos')
-        return redirect('favoritos_listar')
+        return redirect('hotel_comodidad_listar')
 
-def favoritos_eliminar(request, id):
+def hotel_comodidad_eliminar(request, id):
     try:
-        q = Favorito.objects.get(pk = id)
+        q = Hotel_comodidad.objects.get(pk = id)
         q.delete()
-        messages.success(request, 'Hotel favorito eliminado correctamente!!')
+        messages.success(request, 'Comodidad eliminada correctamente!!')
     except Exception as e:
         messages.error(request,f'Error: {e}')
 
-    return redirect('favoritos_listar')
+    return redirect('hotel_comodidad_listar')
 
-def favoritos_formulario_editar(request, id):
+def hotel_comodidad_formulario_editar(request, id):
 
-    q = Favorito.objects.get(pk = id)
+    q = Hotel_comodidad.objects.get(pk = id)
     contexto = {'data': q}
 
-    return render(request, 'planning_travel/favoritos/favoritos_formulario_editar.html', contexto)
+    return render(request, 'planning_travel/hotel_comodidad/hotel_comodidad_formulario_editar.html', contexto)
 
 def favoritos_actualizar(request):
     if request.method == 'POST':
