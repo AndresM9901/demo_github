@@ -95,14 +95,14 @@ def hotel_comodidad_form(request):
 def hotel_comodidad_crear(request):
     if request.method == 'POST':
         id_hotel = request.POST.get('id_hotel')
-        id_usuario = request.POST.get('id_usuario')
-        fecha_agregado = request.POST.get('fecha_agregado')
+        id_comodidad = request.POST.get('id_comodidad')
+        dispone = request.POST.get('dispone')
 
         try:
-            q = Favorito(
+            q = Hotel_comodidad(
                 id_hotel=id_hotel,
-                id_usuario=id_usuario,
-                fecha_agregado=fecha_agregado,
+                id_comodidad=id_comodidad,
+                dispone=dispone,
             )
             q.save()
             messages.success(request, "Fue agregado correctamente")
@@ -131,17 +131,17 @@ def hotel_comodidad_formulario_editar(request, id):
 
     return render(request, 'planning_travel/hotel_comodidad/hotel_comodidad_formulario_editar.html', contexto)
 
-def favoritos_actualizar(request):
+def hotel_comodidad_actualizar(request):
     if request.method == 'POST':
         id_hotel = request.POST.get('id_hotel')
-        id_usuario=request.POST.get('id_usuario')
-        fecha_agregado = request.POST.get('fecha_agregado')
+        id_comodidad = request.POST.get('id_comodidad')
+        dispone = request.POST.get('dispone')
 
         try:
-            q = Favorito.objects.get(pk = id)
+            q = Hotel_comodidad.objects.get(pk = id)
             q.id_hotel= id_hotel
-            q.id_usuario = id_usuario
-            q.fecha_agregado=fecha_agregado
+            q.id_comodidad = id_comodidad
+            q.dispone=dispone
             q.save()
             messages.success(request, "Fue actualizado correctamente")
         except Exception as e:
@@ -149,14 +149,7 @@ def favoritos_actualizar(request):
     else:
         messages.warning(request,'No se enviaron datos')
         
-    return redirect('favoritos_listar')
+    return redirect('hotel_comodidad_listar')
 
 
 
-
-
-
-
-    
-     
-    
